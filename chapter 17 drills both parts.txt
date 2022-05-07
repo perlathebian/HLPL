@@ -1,0 +1,201 @@
+chapter 17
+/--INCLUDES--//
+#include "std_lib_facilities.h"
+
+#include<iostream>
+#include<vector>
+using namespace std;
+//part 4
+void print_array10(ostream& os, int* a)
+{
+	for (int i = 0; i < 10; ++i)
+		os << a[i] << " ";
+}
+
+//part 6+7
+void print_array(ostream& os, int* a, int n)
+{
+	for (int i = 0; i < n; i++)
+		os << a[i] << "";
+}
+
+//part 8
+int* allocateArray(int n)
+{
+	int* a = new int[n];
+	int counter = 100;
+	for (int i = 0; i < n; ++i)
+		a[i] = counter++;
+
+	return a;
+}
+
+//part 10
+vector<int*> allocateVector(int n)
+{
+	vector<int*> temp;
+	int counter = 100;
+	for (int i = 0; i < n; ++i)
+		temp.push_back(new int{counter++});
+	
+	return temp;
+}
+
+
+//part 10
+void print_vector(vector<int*> v)
+{
+	for (int i = 0; i < v.size(); ++i)
+		cout << *v[i] << " ";
+}
+
+
+//part 10
+void delete_vector(vector<int*> v)
+{
+	for (int i = 0; i < v.size(); ++i)
+		delete v[i];
+}
+
+
+int main()
+{
+	//part 1 ----array with 10 ints
+	int* Array = new int[10];
+	
+	//part 2 
+	for (int i = 0; i < 10; i++)
+		cout << Array[i] << " ";
+
+	//part 3
+	delete[] Array;
+
+	//part 4
+	cout << endl << endl;
+	print_array10(cout, Array);
+	delete[] Array;
+
+	//part 5 ----array with 10 ints starting 100,101,...
+	int* Array2 = new int[10]{ 100, 101, 102, 103, 104, 105, 106, 107, 108, 109 };
+	cout << endl << endl;
+	print_array10(cout, Array2);
+	delete[] Array2;
+
+	// drill 6 + 7 ----array with 11 ints starting 100,101,...
+	int* Array3 = new int[11]{ 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110 };
+	cout << endl << endl;
+	print_array(cout, Array3, 11);
+	delete[] Array3;
+
+	//part 8 ----array with 20 ints starting 100,101,...
+	int* Array4 = allocateArray(20);
+	cout << endl << endl;
+	print_array(cout, Array4, 20);
+	delete[] Array4;
+
+	//part 10 ----vector with 10 ints
+	vector<int*> Vector = allocateVector(10);
+	cout << endl << endl;
+	print_vector(Vector);
+	delete_vector(Vector);
+
+	vector<int*> Vector2 = allocateVector(11); //vector with 11 ints
+	cout << endl << endl;
+	print_vector(Vector2);
+	delete_vector(Vector2);
+
+	vector<int*> Vector3 = allocateVector(20); //vector with 20 ints
+	cout << endl << endl;
+	print_vector(Vector3);
+	delete_vector(Vector3);
+	
+
+	return 0;
+}
+______________________________________________________________________________________________________________________________________________________________
+//--INCLUDES--//
+#include "std_lib_facilities.h"
+
+//Second part
+#include<iostream>
+#include<vector>
+using namespace std;
+//part 1
+void print_array(ostream& os, int* a, int n)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		os << *a << " ";
+		++a;	
+	}
+}
+//part 13
+void print_vector(vector<int*> v)
+{
+	for (int i = 0; i < v.size(); ++i)
+		cout << *v[i] << " ";
+}
+
+int main()
+{
+	//part 1
+	int n = 7;
+	int* p1 = &n;
+
+	//part 2
+	cout << "n: " << n << "	p1: " << p1 << endl;
+	
+	//part 3
+	int Array[7] = { 1,2,4,8,16,32,64 };
+	int* p2 = Array;
+
+	//part 4
+	cout << "p2: " << p2 << endl;
+	print_array(cout, p2, 7);
+	cout<<endl<<endl;
+	
+
+	//part 5
+	int* p3 = p2;
+
+	//part 6
+	p2 = p1;
+
+	//part 7
+	p2 = p3;
+
+	//part 8
+	cout << "p1: " << p1 << "/" << *p1 << endl;
+	cout << "p2: " << p2 << "/" << *p2 << endl;
+
+	//part 9
+	//we haven't allocated anything to the free store, they are all local variables;
+	//therefore they are allocated on the stack
+
+	//part 10
+	int Array2[10] = { 1,2,4,8,16,32,64,128,256,512 };
+	p1 = Array2;
+
+	//part 11
+	int Array3[10] = { 10,20,40,80,160,320,640,1280,2560,5120 };
+	p2 = Array3;
+
+	//part 12
+	for (int i = 0; i < 10; ++i)
+		p2[i] = p1[i];
+	print_array(cout, Array2, 10);
+	print_array(cout, Array3, 10);
+
+
+	//part 13
+	vector<int> Vector{ 1,2,4,8,16,32,64,128,256,512 };
+	p1 = &Vector[0];
+	vector<int> Vector2{ 10,20,40,80,160,320,640,1280,2560,5120 };
+	p2 = &Vector2[0];
+	for (int i = 0; i < 10; ++i)
+		p2[i] = p1[i];
+	print_vector(Vector);
+	print_vector(Vector2);
+
+	return 0;
+}

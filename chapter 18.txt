@@ -1,0 +1,123 @@
+chapter 18
+array drill
+
+#include "std_lib_facilities.h"
+
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+
+//part 1
+int ga[10] = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
+
+//part 2
+void f(int a[], int n)
+{
+	//part 3.a
+	int la[10];
+	//part 3.b 
+	for (int i = 0; i < n; i++)
+		la[i] = ga[i];
+
+	//part 3.c
+	cout<<"la: ";
+	for (int i = 0; i < n; i++)
+		cout << la[i] << ", ";
+	cout << endl;
+
+	//part 3.d
+	int *p = new int[n];
+	//part 3.e
+	memcpy(p, a, n*sizeof(int));
+	//part 3.f
+	cout<<"p: ";
+	for (int i = 0; i < n; i++)
+		cout << p[i] << ", ";
+	cout << endl;
+
+	//part 3.g
+	delete[] p;
+}
+
+int fact(int n)
+{
+	return n > 1 ? n*(fact(n - 1)) : 1;
+}
+
+
+int main()
+{
+	//part 4.a
+	f(ga, 10);
+
+	//part 4.b
+	int aa[10] {1, fact(2), fact(3), fact(4), fact(5), fact(6), fact(7), fact(8), fact(9), fact(10) };
+
+	//part 4.c
+	f(aa, 10);
+
+	return 0;
+}
+
+
+____________________________________________________________________________________________________________________________________
+_______________________________________________________________________________________________________________________________________
+vector drill
+
+#include "std_lib_facilities.h"
+
+#include<iostream>
+#include<vector>
+using namespace std;
+
+
+//part 1
+vector<int> gv = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
+
+//part 2
+void f(vector<int>& v)
+{
+	//part 3.a
+	vector<int> lv(10);
+
+	//part 3.b
+	lv = v;
+
+	//part 3.c
+	cout<<"lv: ";
+	for (int i : lv)
+		cout << i << ", ";
+	cout << endl;
+
+	//part 3.d
+	vector<int> lv2 = v;
+
+	//part 3.e
+	for(int i : lv2)
+		cout << i << ", ";
+	cout << endl;
+}
+
+
+int fact(int n)
+{
+	return n > 1 ? n*(fact(n - 1)) : 1;
+}
+
+
+int main()
+{
+	//part 4.a
+	f(gv);
+
+	//part 4.b
+	vector<int> vv = { 1, fact(2), fact(3), fact(4), fact(5), fact(6), fact(7), fact(8), fact(9), fact(10) };
+
+	//part 4.c
+	f(vv);
+
+	return 0;
+}
+

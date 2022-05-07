@@ -1,0 +1,165 @@
+chapter 20 
+#include"std_lib_facilities.h"
+
+#include<iostream>
+#include<list>
+#include<vector>
+using namespace std;
+int main()
+{
+	//part 1 array of ints
+	int Array[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+	//part 2 vector of ints
+	vector<int> Vector{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+	//part 3 list of ints
+	list<int> List{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	
+	cout<<"Array: ";
+	for(int i=0; i<10; i++)
+	    cout<<Array[i]<<" ";
+	    cout<<endl;
+	cout<<"Vector: ";
+    	for(int i=0; i<10; i++)
+	    cout<<Vector[i]<<" ";
+            cout<<endl;
+    	cout<<"List: ";
+    	for(int i : List)
+	    cout<<i<<" ";
+	    cout<<endl<<endl;
+	    
+	//part 4 copies
+	int Array2[10];
+	copy(begin(Array), end(Array), begin(Array2));
+
+	vector<int> Vector2 = Vector;
+
+	list<int> List2 = List;
+    
+    	cout<<"Array2: ";
+	for(int i=0; i<10; i++)
+	    cout<<Array2[i]<<" ";
+	    cout<<endl;
+
+    cout<<"Vector2: ";
+    for(int i=0; i<10; i++)
+	    cout<<Vector2[i]<<" ";
+        cout<<endl;
+    cout<<"List2: ";
+    for(int i : List2)
+	    cout<<i<<" ";
+	    cout<<endl<<endl;
+	//part 5 increase values
+	for (int& i : Array)
+		i += 2;
+
+	for (int& i : Vector)
+		i += 3;
+
+	for (int& i : List)
+		i += 5;
+    	cout<<"Array: ";
+	for(int i=0; i<10; i++)
+	    cout<<Array[i]<<" ";
+	    cout<<endl;
+
+    cout<<"Vector: ";
+    for(int i=0; i<10; i++)
+	    cout<<Vector[i]<<" ";
+        cout<<endl;
+    cout<<"List: ";
+    for(int i : List)
+	    cout<<i<<" ";
+	    cout<<endl<<endl;
+
+	return 0;
+}
+
+______________________________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________________________
+#include "std_lib_facilities.h"
+#include <iterator>
+
+#include<iostream>
+#include<list>
+#include<vector>
+#include <iterator>
+#include<algorithm>
+
+template<typename Iter1, typename Iter2>
+Iter2 IterCopy(Iter1 f1, Iter1 e1, Iter2 f2)
+{
+	while (f1 != e1)
+	{
+		*f2 = *f1;
+		++f1;
+		++f2;
+	}
+
+	return f2;
+}
+
+
+int main()
+{
+	// array of ints
+	int Array[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+	// vector of ints
+	vector<int> Vector{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+	// list of ints
+	list<int> List{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+	// copies
+	int Array2[10];
+	copy(begin(Array), end(Array), begin(Array2));
+	
+	vector<int> Vector2 = Vector;
+
+	list<int> List2 = List;
+
+	// increase values
+	for (int& i : Array)
+		i += 2;
+
+	for (int& i : Vector)
+		i += 3;
+
+	for (int& i : List)
+		i += 5;
+
+	// test IterCopy
+	IterCopy(begin(Array), end(Array), begin(Vector2));
+	if (Array[0] != Vector2[0])
+		cout << "Error: Array[0] && Vector2[0] are not the same!" << endl;
+
+	IterCopy(begin(List), end(List), begin(Array2));
+	if(*(List.begin()) != Array2[0])
+		cout << "Error: List[0] && Array2[0] are not the same!" << endl;
+    cout<<"Vector: ";
+    	for(int i=0; i<10; i++)
+	    cout<<Vector[i]<<" ";
+            cout<<endl;
+    	cout<<"List: ";
+    	for(int i : List)
+	    cout<<i<<" ";
+	    cout<<endl<<endl;
+	// find 3 in vector
+	auto vecResult = find(Vector.begin(), Vector.end(), 3);
+	if (vecResult != Vector.end())
+		cout << "Vector contains 3 at position " << distance(Vector.begin(), vecResult) << endl;
+	else
+		cout << "Vector does not contain 3" << endl;
+
+	// find 27 in list
+	auto listResult = find(List.begin(), List.end(), 27);
+	if (listResult != List.end())
+		cout << "listResult contains 27 at position " << distance(List.begin(), listResult) << endl;
+	else
+		cout << "List does not contain 27" << endl;
+
+
+	return 0;
+}
