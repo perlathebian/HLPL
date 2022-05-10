@@ -79,13 +79,14 @@ int main()
 ______________________________________________________________________________________________________________________________________
 ______________________________________________________________________________________________________________________________________
 #include "std_lib_facilities.h"
-#include <iterator>
+
 
 #include<iostream>
 #include<list>
 #include<vector>
 #include <iterator>
 #include<algorithm>
+using namespace std;
 
 template<typename Iter1, typename Iter2>
 Iter2 IterCopy(Iter1 f1, Iter1 e1, Iter2 f2)
